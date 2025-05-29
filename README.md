@@ -21,3 +21,7 @@
 
 ###  ERD
 [ERD](https://www.erdcloud.com/d/4wzTtEd3rxwG8xP96)
+
+###  인프라 설계도
+[infra](https://www.figma.com/design/AbaECF7kEX6ehZ0G1fxgv8/%EC%9D%B8%ED%94%84%EB%9D%BC-%EC%84%A4%EA%B3%84%EB%8F%84--Community-?node-id=1016-87&t=84homudeMDSpxlpp-1)
+
