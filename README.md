@@ -15,3 +15,6 @@
 
 ### API 명세서
 [API 명세서](https://rough-appliance-207.notion.site/API-2024f2102e6180dfb319d1c45a377120?pvs=4)
+
+### 시나리오 흐름도
+[시퀀스 다이어그램](https://drive.google.com/file/d/1p2jhZ9u84x0MAny859JSLqUSoI3Ts0S6/view?usp=sharing)
