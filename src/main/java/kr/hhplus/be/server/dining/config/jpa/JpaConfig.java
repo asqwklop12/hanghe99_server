@@ -9,11 +9,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableJpaAuditing
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "kr.hhplus.be.server.dining.adapter.out.persistence.jpa")
 public class JpaConfig {
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager();
-    }
+  @Bean
+  public PlatformTransactionManager transactionManager() {
+    return new JpaTransactionManager();
+  }
 }
