@@ -18,3 +18,6 @@
 
 ### 시나리오 흐름도
 [시퀀스 다이어그램](https://drive.google.com/file/d/1p2jhZ9u84x0MAny859JSLqUSoI3Ts0S6/view?usp=sharing)
+
+###  ERD
+[ERD](https://www.erdcloud.com/d/4wzTtEd3rxwG8xP96)
