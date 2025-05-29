@@ -12,3 +12,6 @@
 
 ### 비기능 요구사항
 [비기능 요구사항](https://rough-appliance-207.notion.site/2004f2102e61807785e9e491fa9235bf?pvs=4)
+
+### API 명세서
+[API 명세서](https://rough-appliance-207.notion.site/API-2024f2102e6180dfb319d1c45a377120?pvs=4)
