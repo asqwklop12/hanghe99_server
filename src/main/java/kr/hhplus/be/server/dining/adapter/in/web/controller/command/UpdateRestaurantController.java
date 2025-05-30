@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/dining/restaurant")
+@RequiredArgsConstructor
 public class UpdateRestaurantController {
   private final UpdateRestaurantUseCase updateRestaurantUseCase;
-
-  public UpdateRestaurantController(UpdateRestaurantUseCase updateRestaurantUseCase) {
-    this.updateRestaurantUseCase = updateRestaurantUseCase;
-  }
 
   public void execute() {
     updateRestaurantUseCase.execute();

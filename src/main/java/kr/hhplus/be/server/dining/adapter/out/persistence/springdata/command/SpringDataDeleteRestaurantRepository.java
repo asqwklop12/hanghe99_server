@@ -6,12 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class SpringDataDeleteRestaurantRepository implements DeleteRestaurantRepository {
   private final JpaDeleteRestaurantRepository repository;
-
-  public SpringDataDeleteRestaurantRepository(JpaDeleteRestaurantRepository repository) {
-    this.repository = repository;
-  }
 
   @Override
   public void execute() {

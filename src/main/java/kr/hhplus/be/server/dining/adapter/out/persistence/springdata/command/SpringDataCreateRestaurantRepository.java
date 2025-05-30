@@ -4,15 +4,13 @@ import kr.hhplus.be.server.dining.adapter.out.persistence.entity.RestaurantEntit
 import kr.hhplus.be.server.dining.adapter.out.persistence.jpa.command.JpaCreateRestaurantRepository;
 import kr.hhplus.be.server.dining.application.port.out.repository.command.CreateRestaurantRepository;
 import kr.hhplus.be.server.dining.domain.model.Restaurant;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class SpringDataCreateRestaurantRepository implements CreateRestaurantRepository {
   private final JpaCreateRestaurantRepository repository;
-
-  public SpringDataCreateRestaurantRepository(JpaCreateRestaurantRepository repository) {
-    this.repository = repository;
-  }
 
   @Override
   public Restaurant execute(Restaurant restaurant) {

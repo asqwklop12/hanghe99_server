@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/dining/restaurant")
+@RequiredArgsConstructor
 public class DeleteRestaurantController {
   private final DeleteRestaurantUseCase deleteRestaurantUseCase;
-
-  public DeleteRestaurantController(DeleteRestaurantUseCase deleteRestaurantUseCase) {
-    this.deleteRestaurantUseCase = deleteRestaurantUseCase;
-  }
 
   public void execute() {
     deleteRestaurantUseCase.execute();
