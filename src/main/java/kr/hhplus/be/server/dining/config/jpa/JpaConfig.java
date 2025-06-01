@@ -1,4 +1,4 @@
-package kr.hhplus.be.server.config.jpa;
+package kr.hhplus.be.server.dining.config.jpa;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +9,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableJpaAuditing
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "kr.hhplus.be.server.dining.adapter.out.persistence.jpa")
 public class JpaConfig {
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager();
-    }
+  @Bean
+  public PlatformTransactionManager transactionManager() {
+    return new JpaTransactionManager();
+  }
 }
