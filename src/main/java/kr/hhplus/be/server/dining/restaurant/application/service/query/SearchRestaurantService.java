@@ -6,6 +6,7 @@ import kr.hhplus.be.server.dining.restaurant.application.port.in.usecase.query.S
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,7 @@ public class SearchRestaurantService implements SearchRestaurantUseCase {
   private final SearchRestaurantRepository searchRestaurantPort;
 
   @Override
-  public List<Restaurant> execute() {
+  public List<Restaurant> execute(Restaurant restaurant, Pageable pageable) {
     return Collections.emptyList();
   }
 }
