@@ -10,6 +10,7 @@ import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
 
 class SearchRestaurantServiceTest {
 
@@ -40,5 +41,18 @@ class SearchRestaurantServiceTest {
     //then
     assertThat(fakeSearchRestaurantRepository.execute()).isEqualTo(restaurants);
   }
+
+
+  @Test
+  @DisplayName("데이터를 하나만 존재하고 싶은 경우")
+  void selectSimpleRestaurantPageTest() {
+    //given
+    PageRequest pageRequest = PageRequest.of(1, 1);
+    //when
+    List<Restaurant> restaurants = searchRestaurantService.execute(Restaurant.builder().build(), pageRequest);
+    //then
+    assertThat(restaurants).size().isEqualTo(1);
+  }
+
 
 }
