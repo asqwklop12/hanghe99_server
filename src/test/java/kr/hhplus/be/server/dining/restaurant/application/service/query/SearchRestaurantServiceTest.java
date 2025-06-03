@@ -10,6 +10,8 @@ import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.data.domain.PageRequest;
 
 class SearchRestaurantServiceTest {
@@ -36,22 +38,24 @@ class SearchRestaurantServiceTest {
   @Test
   @DisplayName("데이터가 존재하는 경우")
   void selectSimpleRestaurantTest() {
+    Restaurant restaurant = Restaurant.builder().build();
     //when
-    List<Restaurant> restaurants = searchRestaurantService.execute(Restaurant.builder().build(), null);
+    List<Restaurant> restaurants = searchRestaurantService.execute(restaurant, null);
     //then
-    assertThat(fakeSearchRestaurantRepository.execute()).isEqualTo(restaurants);
+    assertThat(fakeSearchRestaurantRepository.execute(restaurant, null)).isEqualTo(restaurants);
   }
 
 
-  @Test
-  @DisplayName("데이터를 하나만 존재하고 싶은 경우")
-  void selectSimpleRestaurantPageTest() {
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2})
+  @DisplayName("데이터를 n개를 테스트하고 싶은 경우")
+  void selectSimpleRestaurantPageTest(int size) {
     //given
-    PageRequest pageRequest = PageRequest.of(1, 1);
+    PageRequest pageRequest = PageRequest.of(0, size);
     //when
     List<Restaurant> restaurants = searchRestaurantService.execute(Restaurant.builder().build(), pageRequest);
     //then
-    assertThat(restaurants).size().isEqualTo(1);
+    assertThat(restaurants).size().isEqualTo(size);
   }
 
 
