@@ -13,6 +13,6 @@ public class CreateRestaurantService implements CreateRestaurantUseCase {
 
   @Override
   public void execute() {
-    createRestaurantPort.execute(new Restaurant());
+    createRestaurantPort.execute(Restaurant.builder().build());
   }
 }

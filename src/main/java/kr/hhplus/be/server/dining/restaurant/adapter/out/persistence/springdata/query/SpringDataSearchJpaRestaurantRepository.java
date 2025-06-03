@@ -14,6 +14,6 @@ public class SpringDataSearchJpaRestaurantRepository implements SearchRestaurant
   @Override
   public Restaurant execute() {
     repository.findById(1L);
-    return new Restaurant();
+    return null;
   }
 }

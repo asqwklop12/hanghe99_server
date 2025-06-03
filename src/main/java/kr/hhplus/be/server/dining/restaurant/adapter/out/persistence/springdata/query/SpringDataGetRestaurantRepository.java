@@ -14,6 +14,6 @@ public class SpringDataGetRestaurantRepository implements GetRestaurantRepositor
   @Override
   public Restaurant execute() {
     repository.findById(1L);
-    return new Restaurant();
+    return Restaurant.builder().build();
   }
 }
