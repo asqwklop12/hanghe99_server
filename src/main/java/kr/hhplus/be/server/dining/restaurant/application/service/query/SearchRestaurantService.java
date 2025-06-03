@@ -16,6 +16,6 @@ public class SearchRestaurantService implements SearchRestaurantUseCase {
 
   @Override
   public List<Restaurant> execute(Restaurant restaurant, Pageable pageable) {
-    return Collections.emptyList();
+    return searchRestaurantRepository.execute();
   }
 }
