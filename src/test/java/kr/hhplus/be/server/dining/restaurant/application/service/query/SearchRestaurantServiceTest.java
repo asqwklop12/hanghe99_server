@@ -58,17 +58,17 @@ class SearchRestaurantServiceTest {
     assertThat(restaurants).size().isEqualTo(size);
   }
 
-  @Test
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2, 3, 4, 10})
   @DisplayName("페이지가 변경이 되었을때 데이터가 변경되었는지 확인")
-  void selectChangeRestaurantPageTest() {
+  void selectChangeRestaurantPageTest(int size) {
     //given
-    List<Restaurant> firstData = searchRestaurantService.execute(Restaurant.builder().build(), PageRequest.of(0, 4));
-    List<Restaurant> secondData = searchRestaurantService.execute(Restaurant.builder().build(), PageRequest.of(1, 4));
+    List<Restaurant> firstData = searchRestaurantService.execute(Restaurant.builder().build(), PageRequest.of(0, size));
+    List<Restaurant> secondData = searchRestaurantService.execute(Restaurant.builder().build(), PageRequest.of(1, size));
 
     //when&then
     assertThat(firstData).isNotEqualTo(secondData);
   }
-
 
 
 }
