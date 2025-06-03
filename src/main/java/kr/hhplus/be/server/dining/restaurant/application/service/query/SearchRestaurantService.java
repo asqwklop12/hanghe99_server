@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SearchRestaurantService implements SearchRestaurantUseCase {
-  private final SearchRestaurantRepository searchRestaurantPort;
+  private final SearchRestaurantRepository searchRestaurantRepository;
 
   @Override
   public List<Restaurant> execute(Restaurant restaurant, Pageable pageable) {
