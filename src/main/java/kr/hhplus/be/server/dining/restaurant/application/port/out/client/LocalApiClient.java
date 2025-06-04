@@ -6,5 +6,5 @@ import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 
 public interface LocalApiClient {
 
-  List<Restaurant> getRestaurants(RestaurantCriteria criteria);
+  List<Restaurant> execute(RestaurantCriteria criteria);
 }

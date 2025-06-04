@@ -9,9 +9,7 @@ import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Repository;
 
-@Repository
 @RequiredArgsConstructor
 public class SpringDataSearchJpaRestaurantRepository implements SearchRestaurantRepository {
   private final JpaSearchRestaurantRepository repository;
