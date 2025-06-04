@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import java.util.List;
 import kr.hhplus.be.server.dining.restaurant.adapter.out.client.naver.NaverLocalApiClient;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
+import kr.hhplus.be.server.dining.restaurant.application.service.query.fake.FakeNaverLocalApiClient;
 import kr.hhplus.be.server.dining.restaurant.application.service.query.fake.FakeSearchRestaurantRepository;
 import kr.hhplus.be.server.dining.restaurant.criteria.RestaurantCriteria;
 import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
@@ -23,7 +24,8 @@ class NaverRestaurantServiceTest {
   @BeforeEach
   void setUp() {
     //given
-    fakeSearchRestaurantRepository = new NaverLocalApiClient();
+    FakeNaverLocalApiClient fakeNaverLocalApiClient = new FakeNaverLocalApiClient();
+    fakeSearchRestaurantRepository = new NaverLocalApiClient(fakeNaverLocalApiClient);
     searchRestaurantService = new SearchRestaurantService(fakeSearchRestaurantRepository);
   }
 
