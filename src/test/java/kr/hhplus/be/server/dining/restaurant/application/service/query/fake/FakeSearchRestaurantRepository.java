@@ -2,6 +2,7 @@ package kr.hhplus.be.server.dining.restaurant.application.service.query.fake;
 
 import java.util.List;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
+import kr.hhplus.be.server.dining.restaurant.criteria.RestaurantCriteria;
 import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
 import org.springframework.data.domain.Pageable;
 
@@ -22,9 +23,9 @@ public class FakeSearchRestaurantRepository implements SearchRestaurantRepositor
   );
 
   @Override
-  public List<Restaurant> execute(Restaurant restaurant, Pageable pageable) {
-    int start = (int) pageable.getOffset();
-    int end = Math.min((start + pageable.getPageSize()), restaurants.size());
+  public List<Restaurant> execute(RestaurantCriteria criteria) {
+    int start = criteria.start();
+    int end = Math.min((start + criteria.display()), restaurants.size());
     return restaurants.subList(start, end);
   }
 }

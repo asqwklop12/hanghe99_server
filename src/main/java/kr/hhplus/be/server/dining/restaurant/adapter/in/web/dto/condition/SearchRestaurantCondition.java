@@ -1,23 +1,20 @@
 package kr.hhplus.be.server.dining.restaurant.adapter.in.web.dto.condition;
 
-import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
+import kr.hhplus.be.server.dining.restaurant.criteria.RestaurantCriteria;
 import lombok.Builder;
 
 @Builder
 public record SearchRestaurantCondition(
-    Long id,
-    String title,
-    String address,
-    String roadAddress,
+    String query,
     int page,
     int display
 ) {
-  public Restaurant toModel() {
-    return Restaurant.builder()
-        .id(id)
-        .title(title)
-        .address(address)
-        .roadAddress(roadAddress)
+
+  public RestaurantCriteria toCriteria() {
+    return RestaurantCriteria.builder()
+        .query(query)
+        .start(page)
+        .display(display)
         .build();
   }
 }
