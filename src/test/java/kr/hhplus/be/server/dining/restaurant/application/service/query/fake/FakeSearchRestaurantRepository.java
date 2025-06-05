@@ -4,7 +4,6 @@ import java.util.List;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.dining.restaurant.criteria.RestaurantCriteria;
 import kr.hhplus.be.server.dining.restaurant.model.Restaurant;
-import org.springframework.data.domain.Pageable;
 
 public class FakeSearchRestaurantRepository implements SearchRestaurantRepository {
 
