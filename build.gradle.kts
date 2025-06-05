@@ -53,6 +53,9 @@ dependencies {
 
     //WebClient 사용을 위한 의존성 추가
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    //레디스
+    implementation ("org.springframework.boot:spring-boot-starter-data-redis")
 }
 tasks.withType<Test> {
     useJUnitPlatform()
