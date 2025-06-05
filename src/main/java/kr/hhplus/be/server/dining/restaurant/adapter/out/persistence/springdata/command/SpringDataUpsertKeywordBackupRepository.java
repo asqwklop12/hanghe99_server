@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.entity.backup.KeywordBackupEntity;
 import kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.jpa.command.JpaUpsertKeywordBackupRepository;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.command.UpsertKeywordBackupRepository;
+import kr.hhplus.be.server.dining.restaurant.model.KeywordBackup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,13 +15,13 @@ public class SpringDataUpsertKeywordBackupRepository implements UpsertKeywordBac
 
   @Override
   @Transactional
-  public void save(String keyword) {
+  public KeywordBackup save(String keyword) {
 
     KeywordBackupEntity entity = repository.findByKeyword(keyword)
         .orElse(KeywordBackupEntity.builder().keyword(keyword).build());
 
     entity.increase();
 
-    repository.save(entity).toDomain();
+    return repository.save(entity).toDomain();
   }
 }
