@@ -3,6 +3,7 @@ package kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.redis;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.redis.fake.FakeRedisTemplate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -101,6 +102,19 @@ class RedisSearchKeywordAdapterTest {
     assertThat(keywords.size()).isEqualTo(10);
   }
 
-
-
+  @Test
+  @DisplayName("ttl 만료 테스트")
+  void timeOver() throws InterruptedException {
+    //given
+    String keyword = "맛집1";
+    redisSearchKeywordAdapter.saveKeyword(keyword);
+    redisTemplate.expire("keywords", 1, TimeUnit.SECONDS);  // keywords 키에 TTL 설정
+    
+    //when
+    Thread.sleep(1002);  // 1초 대기
+    List<String> keywords = redisSearchKeywordAdapter.searchKeyword();
+    
+    //then
+    assertThat(keywords).isEmpty();
+  }
 }

@@ -18,6 +18,26 @@ import org.springframework.data.redis.core.ZSetOperations;
 
 public class FakeRedisTemplate extends RedisTemplate<String, String> {
   private final Map<String, Map<String, Double>> zSetStore = new ConcurrentHashMap<>();
+  private final Map<String, Long> ttlStore = new ConcurrentHashMap<>();
+
+  @Override
+  public Boolean expire(String key, long timeout, TimeUnit unit) {
+    if (zSetStore.containsKey(key)) {
+      ttlStore.put(key, System.currentTimeMillis() + unit.toMillis(timeout));
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public Long getExpire(String key, TimeUnit unit) {
+    Long expireTime = ttlStore.get(key);
+    if (expireTime == null) {
+      return null;
+    }
+    long remainingTime = expireTime - System.currentTimeMillis();
+    return remainingTime > 0 ? unit.convert(remainingTime, TimeUnit.MILLISECONDS) : -2L;
+  }
 
   @Override
   public ZSetOperations<String, String> opsForZSet() {
@@ -49,6 +69,9 @@ public class FakeRedisTemplate extends RedisTemplate<String, String> {
 
       @Override
       public Double incrementScore(String key, String value, double delta) {
+        if (isExpired(key)) {
+          return null;
+        }
         Map<String, Double> scores = zSetStore.computeIfAbsent(key, k -> new ConcurrentHashMap<>());
         return scores.merge(value, delta, Double::sum);
       }
@@ -126,6 +149,9 @@ public class FakeRedisTemplate extends RedisTemplate<String, String> {
 
       @Override
       public Set<String> reverseRange(String key, long start, long end) {
+        if (isExpired(key)) {
+          return Set.of();
+        }
         Map<String, Double> scores = zSetStore.getOrDefault(key, Map.of());
         return scores.entrySet().stream()
             .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
@@ -213,6 +239,9 @@ public class FakeRedisTemplate extends RedisTemplate<String, String> {
 
       @Override
       public Double score(String key, Object value) {
+        if (isExpired(key)) {
+          return null;
+        }
         Map<String, Double> scores = zSetStore.getOrDefault(key, Map.of());
         return scores.getOrDefault(value.toString(), 0.0);
       }
@@ -357,5 +386,13 @@ public class FakeRedisTemplate extends RedisTemplate<String, String> {
         return null;
       }
     };
+  }
+
+  private boolean isExpired(String key) {
+    Long expireTime = ttlStore.get(key);
+    if (expireTime == null) {
+      return false;
+    }
+    return System.currentTimeMillis() > expireTime;
   }
 }
