@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SearchRestaurantService implements SearchRestaurantUseCase {
   private final SearchRestaurantRepository searchRestaurantRepository;
-//  private final LocalApiClient localApiClient;
 
   @Override
   public List<Restaurant> execute(RestaurantCriteria criteria) {
     return searchRestaurantRepository.execute(criteria);
-//    return searchRestaurantRepository.execute(restaurant, pageable);
   }
 }
