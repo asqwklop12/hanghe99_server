@@ -2,9 +2,11 @@ package kr.hhplus.be.server.dining.restaurant.application.service.query;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 import java.util.List;
 import kr.hhplus.be.server.dining.restaurant.adapter.out.client.naver.NaverLocalApiClient;
+import kr.hhplus.be.server.dining.restaurant.adapter.out.client.naver.NaverLocalGateway;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.dining.restaurant.application.service.query.fake.FakeNaverLocalApiClient;
 import kr.hhplus.be.server.dining.restaurant.application.service.query.fake.FakeSearchRestaurantRepository;

@@ -16,6 +16,7 @@ public class NaverResponseMapper {
   private Restaurant toRestaurant(NaverSearchItem item) {
     return Restaurant.builder()
         .title(item.title())
+        .link(item.link())
         .address(item.address())
         .roadAddress(item.roadAddress())
         .build();

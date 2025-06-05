@@ -7,7 +7,8 @@ import lombok.Builder;
 public record SearchRestaurantCondition(
     String query,
     int page,
-    int display
+    int display,
+    String sort
 ) {
 
   public RestaurantCriteria toCriteria() {
@@ -15,6 +16,7 @@ public record SearchRestaurantCondition(
         .query(query)
         .start(page)
         .display(display)
+        .sort(sort)
         .build();
   }
 }
