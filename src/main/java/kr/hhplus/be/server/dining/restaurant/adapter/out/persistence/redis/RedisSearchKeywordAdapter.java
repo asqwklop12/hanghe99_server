@@ -3,6 +3,7 @@ package kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.redis;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchKeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Component;
 public class RedisSearchKeywordAdapter implements SearchKeywordRepository {
   private final RedisTemplate<String, String> redisTemplate;
   private static final String KEYWORDS_KEY = "keywords";
+  private static final long TTL_MINUTE = 5;  // 5분
 
   @Override
   public void saveKeyword(String keyword) {
     redisTemplate.opsForZSet().incrementScore(KEYWORDS_KEY, keyword, 1);
+    redisTemplate.expire(KEYWORDS_KEY, TTL_MINUTE, TimeUnit.MINUTES);
   }
 
   @Override
