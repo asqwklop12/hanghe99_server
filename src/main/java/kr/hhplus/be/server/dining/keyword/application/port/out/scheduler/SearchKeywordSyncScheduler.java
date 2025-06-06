@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.dining.keyword.application.port.out.scheduler;
 
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import kr.hhplus.be.server.dining.keyword.application.port.out.repository.GetKeywordBackupRepository;
 import kr.hhplus.be.server.dining.keyword.application.port.out.repository.SearchKeywordRepository;
@@ -15,6 +16,11 @@ import org.springframework.stereotype.Component;
 public class SearchKeywordSyncScheduler {
     private final GetKeywordBackupRepository getKeywordBackupRepository;
     private final List<SearchKeywordRepository> searchKeywordRepositories;
+
+    @PostConstruct
+    public void init() {
+        sync();
+    }
 
     @Scheduled(fixedRate = 300000) // 5분 = 300,000ms
     public void sync() {
