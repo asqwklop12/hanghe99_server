@@ -1,20 +1,18 @@
 package kr.hhplus.be.server.dining.keyword.application.port.out.scheduler;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doThrow;
-import static reactor.core.publisher.Mono.when;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import kr.hhplus.be.server.dining.keyword.adapter.out.persistence.memory.InMemorySearchKeywordAdapter;
 import kr.hhplus.be.server.dining.keyword.adapter.out.persistence.redis.RedisSearchKeywordAdapter;
-import kr.hhplus.be.server.dining.keyword.persistence.redis.fake.FakeRedisTemplate;
 import kr.hhplus.be.server.dining.keyword.application.port.out.repository.GetKeywordBackupRepository;
 import kr.hhplus.be.server.dining.keyword.application.port.out.repository.SearchKeywordRepository;
 import kr.hhplus.be.server.dining.keyword.application.port.out.scheduler.fake.FakeGetKeywordBackupRepository;
 import kr.hhplus.be.server.dining.keyword.application.port.out.scheduler.fake.FakeSearchKeywordSyncScheduler;
 import kr.hhplus.be.server.dining.keyword.model.KeywordBackup;
+import kr.hhplus.be.server.dining.keyword.persistence.redis.fake.FakeRedisTemplate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.compileOnly
-
 plugins {
     java
     id("org.springframework.boot") version "3.4.1"
