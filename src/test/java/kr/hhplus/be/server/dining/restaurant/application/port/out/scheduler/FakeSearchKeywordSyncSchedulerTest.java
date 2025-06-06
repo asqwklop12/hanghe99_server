@@ -1,6 +1,8 @@
 package kr.hhplus.be.server.dining.restaurant.application.port.out.scheduler;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doThrow;
+import static reactor.core.publisher.Mono.when;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.redis.Redis
 import kr.hhplus.be.server.dining.restaurant.adapter.out.persistence.redis.fake.FakeRedisTemplate;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.GetKeywordBackupRepository;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.repository.query.SearchKeywordRepository;
+import kr.hhplus.be.server.dining.restaurant.application.port.out.scheduler.fake.FakeGetKeywordBackupRepository;
 import kr.hhplus.be.server.dining.restaurant.application.port.out.scheduler.fake.FakeSearchKeywordSyncScheduler;
 import kr.hhplus.be.server.dining.restaurant.model.KeywordBackup;
 import org.junit.jupiter.api.BeforeEach;
@@ -105,17 +108,5 @@ class FakeSearchKeywordSyncSchedulerTest {
     assertThat(redisTemplate.opsForZSet().score("keywords","카페")).isEqualTo(3.0);
   }
 
-  private static class FakeGetKeywordBackupRepository implements GetKeywordBackupRepository {
-    private final Map<String, KeywordBackup> store = new ConcurrentHashMap<>();
 
-    public void save(KeywordBackup keywordBackup) {
-      store.put(keywordBackup.keyword(), keywordBackup);
-    }
-
-    @Override
-    public List<KeywordBackup> findAll() {
-      return List.copyOf(store.values());
-    }
-
-  }
 } 
