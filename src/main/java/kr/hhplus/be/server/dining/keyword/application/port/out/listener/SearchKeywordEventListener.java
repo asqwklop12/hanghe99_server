@@ -19,7 +19,6 @@ public class SearchKeywordEventListener {
     for (SearchKeywordRepository repository : searchKeywordRepositories) {
       try {
         repository.saveKeyword(event.keyword());
-        break;  // 성공하면 중단
       } catch (Exception ignored) {
       }
     }

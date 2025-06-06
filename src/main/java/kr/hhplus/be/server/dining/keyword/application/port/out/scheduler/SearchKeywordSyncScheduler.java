@@ -28,7 +28,6 @@ public class SearchKeywordSyncScheduler {
                             repository.saveKeyword(keyword.keyword());
                         }
                     }
-                    break; // 성공하면 중단
                 } catch (Exception e) {
                     log.error("Failed to sync keyword data to repository: {}", e.getMessage());
                 }
