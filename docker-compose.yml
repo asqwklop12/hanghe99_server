@@ -11,7 +11,19 @@ services:
       - MYSQL_DATABASE=hhplus
     volumes:
       - ./data/mysql/:/var/lib/mysql
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6379:6379"      # Redis 기본 포트
+      - "8001:8001"      # RedisInsight UI 포트 (웹 브라우저용)
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
 
 networks:
   default:
     driver: bridge
+
+volumes:
+  redis_data:
