@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class NaverLocalApiClient implements SearchRestaurantRepository {
   private final LocalApiClient localApiClient;
+  private final NaverResponseMapper naverResponseMapper;
 
   @Override
   public List<Restaurant> execute(RestaurantCriteria criteria) {

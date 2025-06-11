@@ -1,5 +1,8 @@
 package kr.hhplus.be.server.restaurant.adapter.out.client.naver;
 
+import lombok.Builder;
+
+@Builder
 public record NaverSearchItem(
     String title,
     String link,

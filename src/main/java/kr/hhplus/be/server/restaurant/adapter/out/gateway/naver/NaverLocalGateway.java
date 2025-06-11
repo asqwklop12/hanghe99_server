@@ -32,6 +32,16 @@ public class NaverLocalGateway implements LocalApiClient {
         .bodyToMono(NaverSearchResponse.class)
         .block();
 
-    return naverResponseMapper.toRestaurants(response);
+    List<Restaurant> restaurants = naverResponseMapper.toRestaurants(response);
+    
+    // 필터링된 결과로 새로운 응답 생성
+    NaverSearchResponse filteredResponse = new NaverSearchResponse(
+        restaurants.size(),  // total을 필터링된 결과 개수로 설정
+        response.start(),
+        response.display(),
+        response.items()
+    );
+
+    return naverResponseMapper.toRestaurants(filteredResponse);
   }
 }

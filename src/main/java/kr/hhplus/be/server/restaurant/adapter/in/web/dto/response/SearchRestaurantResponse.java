@@ -12,17 +12,20 @@ public record SearchRestaurantResponse(
     long current,
     int page
 ) {
-  public static SearchRestaurantResponse search(List<Restaurant> restaurants) {
+    public static SearchRestaurantResponse search(List<Restaurant> restaurants) {
+        List<SearchRestaurantList> items = restaurants.stream()
+            .map(r -> SearchRestaurantList.builder()
+                .id(r.id())
+                .title(r.title())
+                .link(r.link())
+                .build())
+            .toList();
 
-    return SearchRestaurantResponse.builder()
-        .items(restaurants.stream().map(r -> SearchRestaurantList.builder()
-            .id(r.id())
-            .title(r.title())
-            .link(r.link())
-            .build()).toList())
-        .total(5)
-        .current(1)
-        .page(1)
-        .build();
-  }
+        return SearchRestaurantResponse.builder()
+            .items(items)
+            .total(items.size())
+            .current(1)
+            .page(1)
+            .build();
+    }
 }
