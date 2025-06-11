@@ -1,6 +1,8 @@
-package kr.hhplus.be.server.restaurant.adapter.out.client.naver;
+package kr.hhplus.be.server.restaurant.adapter.out.gateway.naver;
 
 import java.util.List;
+import kr.hhplus.be.server.restaurant.adapter.out.client.naver.NaverResponseMapper;
+import kr.hhplus.be.server.restaurant.adapter.out.client.naver.NaverSearchResponse;
 import kr.hhplus.be.server.restaurant.application.port.out.client.LocalApiClient;
 import kr.hhplus.be.server.restaurant.criteria.RestaurantCriteria;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
