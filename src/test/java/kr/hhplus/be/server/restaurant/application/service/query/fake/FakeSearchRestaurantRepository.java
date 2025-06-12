@@ -3,6 +3,7 @@ package kr.hhplus.be.server.restaurant.application.service.query.fake;
 import java.util.List;
 import kr.hhplus.be.server.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.restaurant.criteria.RestaurantCriteria;
+import kr.hhplus.be.server.restaurant.model.Pagination;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
 
 public class FakeSearchRestaurantRepository implements SearchRestaurantRepository {
@@ -22,9 +23,21 @@ public class FakeSearchRestaurantRepository implements SearchRestaurantRepositor
   );
 
   @Override
-  public List<Restaurant> execute(RestaurantCriteria criteria) {
+  public Pagination<Restaurant> execute(RestaurantCriteria criteria) {
     int start = criteria.start();
-    int end = Math.min((start + criteria.display()), restaurants.size());
-    return restaurants.subList(start, end);
+    int display = criteria.display() == 0 ? 10 : criteria.display();
+    int end = Math.min((start + display), restaurants.size());
+    
+    if (start >= restaurants.size()) {
+        return Pagination.of(List.of(), 0, display, 0L);
+    }
+
+    List<Restaurant> pageContent = restaurants.subList(start, end);
+    return Pagination.of(
+        pageContent,
+        start / display,
+        display,
+        (long) restaurants.size()
+    );
   }
 }

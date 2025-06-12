@@ -1,4 +1,4 @@
-package kr.hhplus.be.server.keyword.application.port.out.scheduler;
+package kr.hhplus.be.server.keyword.application.port.out.scheduler.fake;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,8 +9,6 @@ import kr.hhplus.be.server.keyword.adapter.out.persistence.memory.InMemorySearch
 import kr.hhplus.be.server.keyword.adapter.out.persistence.redis.RedisSearchKeywordAdapter;
 import kr.hhplus.be.server.keyword.application.port.out.repository.GetKeywordBackupRepository;
 import kr.hhplus.be.server.keyword.application.port.out.repository.SearchKeywordRepository;
-import kr.hhplus.be.server.keyword.application.port.out.scheduler.fake.FakeGetKeywordBackupRepository;
-import kr.hhplus.be.server.keyword.application.port.out.scheduler.fake.FakeSearchKeywordSyncScheduler;
 import kr.hhplus.be.server.keyword.model.KeywordBackup;
 import kr.hhplus.be.server.keyword.persistence.redis.fake.FakeRedisTemplate;
 import org.junit.jupiter.api.BeforeEach;
