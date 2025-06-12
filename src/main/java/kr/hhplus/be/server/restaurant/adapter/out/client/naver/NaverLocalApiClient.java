@@ -4,6 +4,7 @@ import java.util.List;
 import kr.hhplus.be.server.restaurant.application.port.out.client.LocalApiClient;
 import kr.hhplus.be.server.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.restaurant.criteria.RestaurantCriteria;
+import kr.hhplus.be.server.restaurant.model.Pagination;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class NaverLocalApiClient implements SearchRestaurantRepository {
   private final NaverResponseMapper naverResponseMapper;
 
   @Override
-  public List<Restaurant> execute(RestaurantCriteria criteria) {
+  public Pagination<Restaurant> execute(RestaurantCriteria criteria) {
     return localApiClient.execute(criteria);
   }
 }

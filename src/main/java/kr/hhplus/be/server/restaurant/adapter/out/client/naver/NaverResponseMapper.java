@@ -39,17 +39,7 @@ public class NaverResponseMapper {
   }
 
   private boolean isValidCategory(String category) {
-    if (category == null) {
-        return false;
-    }
-
-    // 카테고리를 '>'로 분리하여 각 단계 확인
-    String[] categories = category.split(">");
-    for (String cat : categories) {
-        if (VALID_CATEGORIES.contains(cat.trim())) {
-            return true;
-        }
-    }
-    return false;
+    return VALID_CATEGORIES.stream()
+        .anyMatch(validCategory -> category.contains(validCategory));
   }
 }

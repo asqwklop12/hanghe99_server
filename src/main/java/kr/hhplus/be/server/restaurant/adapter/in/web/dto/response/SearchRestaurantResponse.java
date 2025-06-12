@@ -2,6 +2,7 @@ package kr.hhplus.be.server.restaurant.adapter.in.web.dto.response;
 
 import java.util.List;
 import kr.hhplus.be.server.restaurant.adapter.in.web.dto.response.list.SearchRestaurantList;
+import kr.hhplus.be.server.restaurant.model.Pagination;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
 import lombok.Builder;
 
@@ -12,8 +13,8 @@ public record SearchRestaurantResponse(
     long current,
     int page
 ) {
-    public static SearchRestaurantResponse search(List<Restaurant> restaurants) {
-        List<SearchRestaurantList> items = restaurants.stream()
+    public static SearchRestaurantResponse search(Pagination<Restaurant> restaurants) {
+        List<SearchRestaurantList> items = restaurants.getContent().stream()
             .map(r -> SearchRestaurantList.builder()
                 .id(r.id())
                 .title(r.title())
@@ -23,9 +24,9 @@ public record SearchRestaurantResponse(
 
         return SearchRestaurantResponse.builder()
             .items(items)
-            .total(items.size())
-            .current(1)
-            .page(1)
+            .total(restaurants.getTotal())
+            .current(restaurants.getSize())
+            .page(restaurants.getPage())
             .build();
     }
 }

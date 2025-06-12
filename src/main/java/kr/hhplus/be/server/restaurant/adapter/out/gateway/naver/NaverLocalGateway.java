@@ -5,6 +5,7 @@ import kr.hhplus.be.server.restaurant.adapter.out.client.naver.NaverResponseMapp
 import kr.hhplus.be.server.restaurant.adapter.out.client.naver.NaverSearchResponse;
 import kr.hhplus.be.server.restaurant.application.port.out.client.LocalApiClient;
 import kr.hhplus.be.server.restaurant.criteria.RestaurantCriteria;
+import kr.hhplus.be.server.restaurant.model.Pagination;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ public class NaverLocalGateway implements LocalApiClient {
   private final NaverResponseMapper naverResponseMapper;
 
   @Override
-  public List<Restaurant> execute(RestaurantCriteria criteria) {
+  public Pagination<Restaurant> execute(RestaurantCriteria criteria) {
     NaverSearchResponse response = webClient.get()
         .uri(uriBuilder -> uriBuilder
             .path("/local.json")
@@ -42,6 +43,11 @@ public class NaverLocalGateway implements LocalApiClient {
         response.items()
     );
 
-    return naverResponseMapper.toRestaurants(filteredResponse);
+    return Pagination.of(
+        naverResponseMapper.toRestaurants(filteredResponse),
+        response.display(),
+        response.start(),
+        response.total()
+    );
   }
 }
