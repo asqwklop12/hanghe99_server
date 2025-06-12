@@ -14,13 +14,25 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SearchRestaurantService implements SearchRestaurantUseCase {
-  private final SearchRestaurantRepository searchRestaurantRepository;
+  private final List<SearchRestaurantRepository> repositories;
   private final ApplicationEventPublisher eventPublisher;
 
   @Override
   public Pagination<Restaurant> execute(RestaurantCriteria criteria) {
     // 이벤트 리스너로 넘긴다.
     eventPublisher.publishEvent(new SearchEvent(criteria.query()));
-    return searchRestaurantRepository.execute(criteria);
+
+    for (SearchRestaurantRepository repository : repositories) {
+      try {
+        return repository.execute(criteria);
+      } catch (Exception ignore) {}
+    }
+
+    return Pagination.of(
+        List.of(),
+        criteria.start(),
+        criteria.display(),
+        0L
+    );
   }
 }

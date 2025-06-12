@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import kr.hhplus.be.server.restaurant.application.port.out.repository.query.SearchRestaurantRepository;
 import kr.hhplus.be.server.restaurant.application.service.query.fake.FakeSearchRestaurantRepository;
 import kr.hhplus.be.server.restaurant.criteria.RestaurantCriteria;
@@ -18,8 +19,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.util.List;
-
 @ExtendWith(MockitoExtension.class)
 class SearchRestaurantServiceTest {
 
@@ -31,7 +30,7 @@ class SearchRestaurantServiceTest {
     //given
     fakeSearchRestaurantRepository = new FakeSearchRestaurantRepository();
     ApplicationEventPublisher eventPublisher = mock(ApplicationEventPublisher.class);
-    searchRestaurantService = new SearchRestaurantService(fakeSearchRestaurantRepository, eventPublisher);
+    searchRestaurantService = new SearchRestaurantService(List.of(fakeSearchRestaurantRepository), eventPublisher);
   }
 
   @Test
