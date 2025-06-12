@@ -40,6 +40,6 @@ public class NaverResponseMapper {
 
   private boolean isValidCategory(String category) {
     return VALID_CATEGORIES.stream()
-        .anyMatch(validCategory -> category.contains(validCategory));
+        .anyMatch(category::contains);
   }
 }

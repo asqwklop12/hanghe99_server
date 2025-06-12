@@ -1,12 +1,11 @@
 package kr.hhplus.be.server.restaurant.adapter.out.client.naver;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import kr.hhplus.be.server.restaurant.model.Restaurant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class NaverResponseMapperTest {
 

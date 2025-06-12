@@ -1,6 +1,5 @@
 package kr.hhplus.be.server.restaurant.adapter.out.persistence.springdata.query;
 
-import java.util.List;
 import kr.hhplus.be.server.restaurant.adapter.out.persistence.entity.RestaurantEntity;
 import kr.hhplus.be.server.restaurant.adapter.out.persistence.jpa.query.JpaSearchRestaurantRepository;
 import kr.hhplus.be.server.restaurant.application.port.out.repository.query.SearchRestaurantRepository;

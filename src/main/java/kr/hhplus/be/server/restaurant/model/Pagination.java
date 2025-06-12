@@ -1,7 +1,6 @@
 package kr.hhplus.be.server.restaurant.model;
 
 import java.util.List;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
