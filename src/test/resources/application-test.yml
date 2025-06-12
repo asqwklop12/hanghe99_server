@@ -1,0 +1,10 @@
+client:
+  naver:
+    X-Naver-Client-Id: "test_client_id"
+    X-Naver-Client-Secret: "test_client_secret"
+    base-url: "https://openapi.naver.com"
+    local-search-path: "/v1/search/local.json"
+
+spring:
+  application:
+    name: restaurant-service-test 
