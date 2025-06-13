@@ -54,6 +54,12 @@ dependencies {
 
     //레디스
     implementation ("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // Test Containers
+    testImplementation("org.testcontainers:testcontainers:1.19.7")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.7")
+    testImplementation("org.testcontainers:postgresql:1.19.7")
+    testImplementation("org.testcontainers:r2dbc:1.19.7")
 }
 tasks.withType<Test> {
     useJUnitPlatform()
