@@ -102,4 +102,31 @@ class InMemorySearchKeywordAdapterTest {
     assertThat(keywords.size()).isEqualTo(10);
   }
 
+  @Test
+  @DisplayName("동시에 여러 사용자가 같은 키워드로 저장 요청 시 카운트가 정확히 누적되는지(동시성 이슈) 통합 테스트")
+  void concurrentSaveKeyword_inMemory() throws InterruptedException {
+    // given
+    String keyword = "동시성맛집";
+    int threadCount = 50;
+    int repeat = 5000;
+    Thread[] threads = new Thread[threadCount];
+    java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(threadCount);
+
+    // when
+    for (int i = 0; i < threadCount; i++) {
+      threads[i] = new Thread(() -> {
+        for (int j = 0; j < repeat; j++) {
+          adapter.saveKeyword(keyword);
+        }
+        latch.countDown();
+      });
+      threads[i].start();
+    }
+    latch.await();
+
+    // then
+    Integer count = keywordCounts.get(keyword);
+    org.assertj.core.api.Assertions.assertThat(count).isEqualTo(threadCount * repeat);
+  }
+
 }
