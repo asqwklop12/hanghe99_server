@@ -54,6 +54,8 @@ dependencies {
 
     //레디스
     implementation ("org.springframework.boot:spring-boot-starter-data-redis")
+
+    implementation("org.redisson:redisson-spring-boot-starter:3.28.0")
 }
 tasks.withType<Test> {
     useJUnitPlatform()
